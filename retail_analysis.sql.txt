@@ -1,0 +1,76 @@
+CREATE DATABASE retail_analytics;
+
+USE retail_analytics;
+
+SELECT COUNT(*) FROM superstore;
+SELECT * FROM superstore;
+
+-- Total sales 
+SELECT SUM(Sales) AS Total_Sales
+FROM superstore;
+
+-- Total Avg
+SELECT AVG(Sales) AS Average_Sales
+FROM superstore;
+
+-- Highest sales
+SELECT MAX(Sales) AS Highest_Sales
+FROM superstore;
+
+-- Lowest sales
+SELECT MIN(Sales) AS Lowest_Sales
+FROM superstore;
+
+-- Category wise sales 
+SELECT 
+    Category,
+    SUM(Sales) AS Total_Sales
+FROM superstore
+GROUP BY Category;
+
+-- Category wise profit 
+SELECT 
+    Category,
+    SUM(Profit) AS Total_Profit
+FROM superstore
+GROUP BY Category;
+
+-- Region wise sales 
+SELECT 
+    Region,
+    SUM(Sales) AS Total_Sales
+FROM superstore
+GROUP BY Region;
+
+-- Region wise profit
+SELECT 
+    Region,
+    SUM(Profit) AS Total_Profit
+FROM superstore
+GROUP BY Region;
+
+-- Top 10 Customers
+SELECT 
+    `Customer Name`,
+    SUM(Sales) AS Total_Sales
+FROM superstore
+GROUP BY `Customer Name`
+ORDER BY Total_Sales DESC
+LIMIT 10;
+
+-- Loss Making Products
+SELECT 
+    `Product Name`,
+    SUM(Profit) AS Total_Profit
+FROM superstore
+GROUP BY `Product Name`
+ORDER BY Total_Profit ASC
+LIMIT 10;
+
+-- Discount Impact Analysis
+SELECT 
+    Discount,
+    AVG(Profit) AS Average_Profit
+FROM superstore
+GROUP BY Discount
+ORDER BY Discount;
